@@ -14,8 +14,8 @@
 
 ### Algorithm Design Logic
 
-`[User: frequency , timespan , personalilty*3 , ability*3 , preference*3 , score*3]`
-`[Workout: type , difficulty]`
++ `[User: frequency , timespan , personalilty*3 , ability*3 , preference*3 , score*3]`
++ `[Workout: type , difficulty]`
 
 ```java
 Main()  
@@ -29,19 +29,22 @@ Main()
     result = Plan(candidate_list)  
 }
 
-Plan(candidate_list, user_score)  
+Plan(candidate_list)  
 {  
     do {  
         plan = Generate(candidate_list)  
-    } while (CalcScore(plan) < user_score)  
+    } while (!Validate(plan))  
     return plan  
 }
 
-CalcScore(plan)  
+Validate(plan)  
 {  
     for each workout in plan  
-        score += workout_difficulty * time  
-    return score  
+        score += workout_difficulty * time
+    if score < user_score
+        return true
+    else
+        return false
 }
 
 Generate(candidate_list)  
